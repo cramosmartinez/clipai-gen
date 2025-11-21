@@ -1,0 +1,18 @@
+﻿flask
+flask-cors
+flask-login
+werkzeug
+yt-dlp
+openai-whisper
+python-dotenv
+ffmpeg-python
+numpy
+requests
+gunicorn
+# Dependencias Google (REST)
+google-api-core
+google-auth
+google-auth-oauthlib
+google-resumable-media
+celery
+redis

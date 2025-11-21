@@ -1,0 +1,70 @@
+/* frontend/css/styles.css */
+
+/* Estilos Glassmorphism y Utilidades */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.input-glass {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.input-glass:focus {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* Animación del Modal */
+#loginModal {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#loginModal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+#loginModal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Botones de Opción */
+.option-btn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #888;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.option-btn:hover {
+    background: #262626;
+    color: #ccc;
+    transform: translateY(-1px);
+}
+.option-btn.active {
+    background: #262626;
+    border-color: #8b5cf6;
+    color: white;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+/* Efectos Hover */
+.group-header:hover .group-header-hover\:scale-110 {
+    transform: scale(1.1);
+}
+

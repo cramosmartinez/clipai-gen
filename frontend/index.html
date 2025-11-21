@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipAI Gen - Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { DEFAULT: '#8b5cf6', dark: '#7c3aed', light: '#a78bfa', accent: '#d946ef' }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-zinc-950 font-sans selection:bg-brand/30">
+
+    <nav class="sticky top-0 z-40 w-full glass-panel border-b-0 border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="h-9 w-9 bg-gradient-to-br from-brand to-brand-accent rounded-xl flex items-center justify-center shadow-lg shadow-brand/20">
+                        <i class="ph-fill ph-video text-white text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400">ClipAI Gen</span>
+                    <span class="ml-2 px-2 py-0.5 text-[10px] font-bold tracking-wider bg-brand/10 text-brand-light border border-brand/20 rounded-full uppercase">PRO Beta</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div id="creditsCounter" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900/50 rounded-full border border-yellow-500/30 text-sm font-medium text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.15)] transition-all">
+                        <i class="ph-fill ph-lightning"></i>
+                        <span>-- Créditos</span>
+                    </div>
+
+                    <div class="relative">
+                        <button id="navLoginBtn" class="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all text-sm font-medium group">
+                            <span>Iniciar Sesión</span>
+                            <i class="ph-bold ph-sign-in text-brand-light group-hover:translate-x-0.5 transition-transform"></i>
+                        </button>
+
+                        <div id="userMenuBtn" class="hidden items-center gap-3 pl-4 pr-2 py-1.5 glass-panel rounded-full cursor-pointer hover:bg-white/5 transition-all group">
+                            <span id="usernameDisplay" class="text-sm font-medium text-zinc-300">Usuario</span>
+                            <div class="h-8 w-8 bg-gradient-to-tr from-zinc-700 to-zinc-600 rounded-full flex items-center justify-center border border-white/10 group-hover:border-brand/50 transition-all">
+                                <i class="ph-bold ph-user text-zinc-300"></i>
+                            </div>
+                             <div class="absolute right-0 top-12 w-48 p-1 glass-panel rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                                <button id="navLogoutBtn" class="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                                    <i class="ph-bold ph-sign-out"></i> Cerrar Sesión
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16 relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand/20 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+        <section class="space-y-8 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+                Crea clips virales con <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand via-accent to-brand-light">Inteligencia Artificial</span>
+            </h1>
+            <p class="text-zinc-400 text-lg max-w-2xl mx-auto">
+                Pega un enlace de YouTube y nuestra IA se encargará de encontrar los mejores momentos.
+            </p>
+
+            <div class="max-w-3xl mx-auto p-1.5 glass-panel rounded-2xl shadow-2xl shadow-brand/5 relative overflow-hidden group-focus-within:shadow-brand/20 transition-all duration-500">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand via-accent to-brand opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+                <div class="relative flex flex-col md:flex-row items-stretch gap-2 bg-zinc-950/80 rounded-[14px] p-1">
+                    <div class="relative flex-grow flex items-center px-4 bg-white/5 rounded-xl border border-white/5 focus-within:border-brand/50 focus-within:bg-zinc-900 transition-all">
+                        <i class="ph-bold ph-link text-zinc-500 text-lg mr-3"></i>
+                        <input type="text" id="videoUrl" placeholder="Pega el enlace de YouTube aquí..." class="w-full bg-transparent border-none focus:ring-0 text-zinc-100 placeholder-zinc-500 py-4 outline-none text-[15px]">
+                    </div>
+                    <button id="processBtn" disabled class="md:w-auto w-full px-8 py-4 bg-gradient-to-r from-brand to-brand-accent hover:from-brand-dark hover:to-brand text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-brand/25 transition-all scale-100 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none">
+                        <i class="ph-fill ph-sparkle text-xl"></i> <span>Generar Clips</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="settingsPanel" class="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden hidden animate-fade-in-up">
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="space-y-3">
+                     <label class="text-sm font-medium text-zinc-400">Estilo de Recorte</label>
+                     <div class="grid grid-cols-3 gap-2" id="cropOptions">
+                        <button data-type="crop" data-val="auto" class="option-btn active">Auto</button>
+                        <button data-type="crop" data-val="center" class="option-btn">Centro</button>
+                        <button data-type="crop" data-val="full" class="option-btn">Full</button>
+                     </div>
+                </div>
+                <div class="space-y-3">
+                     <label class="text-sm font-medium text-zinc-400">Duración</label>
+                     <div class="grid grid-cols-3 gap-2" id="durationOptions">
+                        <button data-type="duration" data-val="auto" class="option-btn active">Auto</button>
+                        <button data-type="duration" data-val="short" class="option-btn">Corto</button>
+                        <button data-type="duration" data-val="long" class="option-btn">Largo</button>
+                     </div>
+                </div>
+                 <div class="space-y-3">
+                    <label class="text-sm font-medium text-zinc-400">Colores de Marca</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="relative group">
+                            <input type="color" id="colorPrimary" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" value="#FFFFFF">
+                            <div class="w-full h-10 rounded-lg border border-white/10 bg-zinc-900 flex items-center justify-center text-xs text-zinc-400 group-hover:border-brand/50 transition-all">Texto</div>
+                        </div>
+                        <div class="relative group">
+                            <input type="color" id="colorOutline" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" value="#000000">
+                            <div class="w-full h-10 rounded-lg border border-white/10 bg-zinc-900 flex items-center justify-center text-xs text-zinc-400 group-hover:border-brand/50 transition-all">Borde</div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+        </section>
+
+        <div id="resultsArea" class="hidden space-y-8">
+            <div id="progressContainer" class="glass-panel p-6 rounded-2xl space-y-4">
+                 <div class="flex items-center justify-between">
+                    <h3 id="progressStatus" class="text-lg font-bold flex items-center gap-3">Iniciando...</h3>
+                    <span id="progressPercent" class="text-2xl font-black text-brand-light">0%</span>
+                 </div>
+                <div class="h-3 w-full bg-zinc-900/50 rounded-full overflow-hidden p-0.5 relative">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-brand to-accent rounded-full w-0 transition-all duration-500 relative"></div>
+                </div>
+                <p id="progressDetail" class="text-sm text-zinc-400 text-center font-medium font-mono">...</p>
+            </div>
+            <div id="clipsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </main>
+
+    <div id="loginModal" class="fixed inset-0 z-50 bg-zinc-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="relative w-full max-w-[400px] bg-zinc-900/90 border border-white/10 rounded-3xl shadow-2xl p-8">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-zinc-400 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button>
+            
+            <div class="text-center mb-6">
+                <div class="h-12 w-12 bg-gradient-to-br from-brand to-accent rounded-xl flex items-center justify-center shadow-lg shadow-brand/20 mx-auto mb-4">
+                    <i class="ph-fill ph-user-circle text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold">Bienvenido</h3>
+                <p class="text-zinc-400 text-sm">Inicia sesión para usar tus créditos.</p>
+            </div>
+
+            <form id="loginForm" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-xs text-zinc-500 ml-1">Usuario</label>
+                    <input type="text" id="usernameInput" required placeholder="ej. test" class="w-full input-glass rounded-xl py-3 px-4 text-white outline-none">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs text-zinc-500 ml-1">Contraseña</label>
+                    <input type="password" id="passwordInput" required placeholder="••••" class="w-full input-glass rounded-xl py-3 px-4 text-white outline-none">
+                </div>
+                
+                <div id="loginError" class="hidden p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-300 text-xs text-center"></div>
+                
+                <button type="submit" id="loginSubmitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand to-accent hover:from-brand-dark hover:to-brand text-white font-bold rounded-xl flex justify-center gap-2 transition-all">
+                    <span>Ingresar</span>
+                    <svg id="loginSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

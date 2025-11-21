@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  clipai-app:
+    # Construir desde el Dockerfile en la carpeta actual (raíz)
+    build: .
+    container_name: clipai-gen-container
+    
+    # Mapeo de puertos (Host:Container)
+    ports:
+      - "8000:5000"
+      
+    # Mapeo de Volúmenes (Persistencia y configuración)
+    volumes:
+      # 1. Persistencia de Clips y Archivos Temporales (Historial)
+      - ./backend/temp:/app/backend/temp
+      
+      # 2. Archivos de Configuración (Inyección segura al inicio)
+      - ./.env:/app/.env
+      - ./backend/cookies.txt:/app/backend/cookies.txt
+      
+      # 3. Mapeo de código (Descomentar para desarrollo en caliente sin reconstruir)
+      # - ./backend:/app/backend
+      # - ./frontend:/app/frontend
+
+    # Configuración del entorno
+    environment:
+      - PYTHONUNBUFFERED=1
+    
+    # Asegura que el contenedor reinicie si se detiene inesperadamente
+    restart: unless-stopped
