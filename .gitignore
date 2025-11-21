@@ -1,0 +1,31 @@
+# ------------------------------------
+# 1. Configuración y Entorno (Sensible)
+# ------------------------------------
+.env
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Entornos Virtuales
+venv/
+.venv/
+*/.conda/
+
+# ------------------------------------
+# 2. Archivos Generados por la App (GRANDES/TEMPORALES)
+# ------------------------------------
+
+# Carpeta de datos temporales (clips, DB, transcripciones)
+backend/temp/
+
+# Base de datos SQLite
+backend/temp/clips.db
+
+# Modelos Whisper descargados (son grandes, cientos de MB)
+# Esto evitará subir el modelo 'tiny' o 'base'
+whisper_models/
+
+# Archivos de video y subtítulos
+*.mp4
+*.srt
+*.vtt
