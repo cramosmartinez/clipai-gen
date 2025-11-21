@@ -5,7 +5,7 @@ import os
 warnings.filterwarnings("ignore")
 
 print("⏳ Cargando modelo Whisper (Modo Tiny - Estable)...")
-# Usamos el motor original
+# Usamos el motor
 model = whisper.load_model("tiny") 
 print("✅ Modelo Whisper cargado.")
 
